@@ -1,5 +1,5 @@
 package ir.maktab.sports.competition.model;
 
-public interface league {
-
+public enum Sports {
+    FOOTBALL,VOLLEYBALL
 }
