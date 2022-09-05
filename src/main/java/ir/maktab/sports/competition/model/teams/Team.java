@@ -15,6 +15,17 @@ public abstract class Team {
     List<Player> players = new ArrayList<>();
     List<Competition> competitionList = new ArrayList<>();
 
+    public Team(String name, String nationality) {
+        this.name = name;
+        this.nationality = nationality;
+        score = 0;
+    }
+
+    public Team(int id, String name, String nationality) {
+        this.id = id;
+        this.name = name;
+        this.nationality = nationality;
+    }
 
     public Team(String name, String nationality, List<Player> players, List<Competition> competitionList, int score) {
         this.name = name;
