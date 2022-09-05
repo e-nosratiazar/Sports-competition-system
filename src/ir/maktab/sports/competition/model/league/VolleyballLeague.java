@@ -1,13 +1,18 @@
 package ir.maktab.sports.competition.model.league;
 
-public class VolleyballLeague implements league{
+import ir.maktab.sports.competition.model.Sports;
+import ir.maktab.sports.competition.model.teams.Team;
+
+public class VolleyballLeague implements league {
+    Sports sport = Sports.VOLLEYBALL;
+
     @Override
-    public void addClub() {
+    public void addTeam(Team team) {
 
     }
 
     @Override
-    public void deleteClub() {
+    public void deleteTeam() {
 
     }
 
@@ -17,7 +22,7 @@ public class VolleyballLeague implements league{
     }
 
     @Override
-    public void showInformationOfClub() {
+    public void showInformationOfTeam() {
 
     }
 
