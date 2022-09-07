@@ -1,8 +1,8 @@
 package ir.maktab.sports.competition.view;
 
-public class FootballLeagueView extends AbstractView {
+public class VolleyballLeagueView extends AbstractView {
 
-    public void showFootballLeagueMenu() {
+    public void showVolleyballLeagueMenu() {
         boolean stayInMenu = true;
         while (stayInMenu) {
             System.out.print("\t1 : add a team" +
@@ -17,21 +17,23 @@ public class FootballLeagueView extends AbstractView {
             switch (option) {
                 case 1:
                     AddTeamView addTeamView = new AddTeamView();
-                    addTeamView.showAddFootballTeamMenu();
+                    addTeamView.showAddVolleyballTeamMenu();
                     break;
                 case 2:
                     DeleteTeamView deleteTeamView = new DeleteTeamView();
-                    deleteTeamView.deleteFootballTeamMenu();
+                    deleteTeamView.deleteVolleyballTeam();
                     break;
                 case 3:
-                    // TODO: 9/5/2022 add game method
+                    AddGameView addGameView = new AddGameView();
+                    addGameView.showAddVolleyballGameMenu();
                     break;
                 case 4:
-                    // TODO: 9/5/2022  show information team
                     ShowInformationTeamView showInformationTeamView = new ShowInformationTeamView();
-                    showInformationTeamView.showInformationFootballTeamMenu();
+                    showInformationTeamView.showInformationVolleyballTeamMenu();
                     break;
                 case 5: // TODO: 9/5/2022 show table
+                    ShowLeagueTableView showLeagueTableView = new ShowLeagueTableView();
+                    showLeagueTableView.showVolleyballLeagueTable();
                     break;
                 case 6:
                     stayInMenu = false;

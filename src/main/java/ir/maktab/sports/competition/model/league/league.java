@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class league {
-int id;
-Sports sport;
-List<Team> teams=new ArrayList<>();
+    int id;
+    Sports sport;
+    List<Team> teams = new ArrayList<>();
 
 }

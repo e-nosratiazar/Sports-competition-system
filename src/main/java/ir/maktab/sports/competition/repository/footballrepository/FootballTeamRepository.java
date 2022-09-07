@@ -38,7 +38,7 @@ public class FootballTeamRepository {
 
     private static List<FootballTeam> doLoadAllTeams() throws SQLException {
         List<FootballTeam> result = new ArrayList<>();
-        String sql = "select id, name, nationality from t_team";
+        String sql = "select id, name, nationality from t_team where league_id=1";
         Statement statement = Application.getConnection().createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
@@ -60,8 +60,8 @@ public class FootballTeamRepository {
     }
 
     private int doRemoveById(int i) throws SQLException {
-        String sql="delete from t_team where id=?";
-        PreparedStatement preparedStatement=Application.getConnection().prepareStatement(sql);
+        String sql = "delete from t_team where id=?";
+        PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, i);
         return preparedStatement.executeUpdate();
     }
@@ -69,15 +69,15 @@ public class FootballTeamRepository {
 
     public FootballTeam showInformationTeamById(int i) throws SQLException {
         FootballTeam footballTeam = null;
-        String sql="select name,nationality,score from t_team where id=?";
-        PreparedStatement preparedStatement=Application.getConnection().prepareStatement(sql);
+        String sql = "select name,nationality,score from t_team where id=?";
+        PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, i);
-        ResultSet resultSet =preparedStatement.executeQuery();
-        while (resultSet.next()){
-            String  teamName=resultSet.getString("name");
-            String nationality=resultSet.getString("nationality");
-            double  score=resultSet.getDouble("score");
-             footballTeam = new FootballTeam(i,teamName,nationality);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String teamName = resultSet.getString("name");
+            String nationality = resultSet.getString("nationality");
+            double score = resultSet.getDouble("score");
+            footballTeam = new FootballTeam(i, teamName, nationality);
         }
         return footballTeam;
     }

@@ -10,9 +10,9 @@ public class VolleyballLeague extends league {
     Sports sport;
     List<VolleyballTeam> volleyballTeams;
 
-    public VolleyballLeague( List<VolleyballTeam> volleyballTeams) {
+    public VolleyballLeague(List<VolleyballTeam> volleyballTeams) {
         this.volleyballTeams = volleyballTeams;
-        this.sport =Sports.VOLLEYBALL;
+        this.sport = Sports.VOLLEYBALL;
     }
 
     public List<VolleyballTeam> getVolleyballTeams() {

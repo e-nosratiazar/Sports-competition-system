@@ -19,7 +19,7 @@ public class FootballTeamService {
         }
     }
 
-    public List<FootballTeam> loadAllTeams() {
+    public List<FootballTeam> loadAllFootballTeams() {
         return footballTeamRepository.loadAllTeams();
     }
 
@@ -31,7 +31,7 @@ public class FootballTeamService {
             } else {
                 return "failed to remove";
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return "failed to remove";
         }
     }

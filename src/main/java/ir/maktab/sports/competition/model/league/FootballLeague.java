@@ -13,7 +13,7 @@ public class FootballLeague extends league {
 
     public FootballLeague(List<FootballTeam> footballTeams) {
         this.footballTeams = footballTeams;
-        this.sport=Sports.FOOTBALL;
+        this.sport = Sports.FOOTBALL;
     }
 
     public List<FootballTeam> getFootballTeams() {
