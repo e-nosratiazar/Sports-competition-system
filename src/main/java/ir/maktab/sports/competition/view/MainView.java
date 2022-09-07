@@ -1,12 +1,13 @@
 package ir.maktab.sports.competition.view;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MainView extends AbstractView{
 
 
 
-    public void showMainView() {
+    public void showMainView()  {
         boolean stayInMenu = true;
         while (stayInMenu) {
             System.out.print(

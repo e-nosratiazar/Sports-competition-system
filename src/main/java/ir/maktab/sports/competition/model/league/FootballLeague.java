@@ -1,32 +1,26 @@
 package ir.maktab.sports.competition.model.league;
 
 import ir.maktab.sports.competition.model.Sports;
+import ir.maktab.sports.competition.model.teams.FootballTeam;
 import ir.maktab.sports.competition.model.teams.Team;
 
-public class FootballLeague implements league{
-    Sports sport = Sports.FOOTBALL;
-    @Override
-    public void addTeam(Team team) {
+import java.util.ArrayList;
+import java.util.List;
 
+public class FootballLeague extends league {
+    Sports sport;
+    List<FootballTeam> footballTeams;
+
+    public FootballLeague(List<FootballTeam> footballTeams) {
+        this.footballTeams = footballTeams;
+        this.sport=Sports.FOOTBALL;
     }
 
-    @Override
-    public void deleteTeam() {
-
+    public List<FootballTeam> getFootballTeams() {
+        return footballTeams;
     }
 
-    @Override
-    public void addGame() {
-
-    }
-
-    @Override
-    public void showInformationOfTeam() {
-
-    }
-
-    @Override
-    public void showTournamentTable() {
-
+    public void setFootballTeams(List<FootballTeam> footballTeams) {
+        this.footballTeams = footballTeams;
     }
 }

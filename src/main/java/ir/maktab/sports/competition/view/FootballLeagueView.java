@@ -1,5 +1,6 @@
 package ir.maktab.sports.competition.view;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class FootballLeagueView extends AbstractView {
@@ -18,20 +19,20 @@ public class FootballLeagueView extends AbstractView {
 
             switch (option) {
                 case 1:
-                    // TODO: 9/5/2022 add team method
                     AddTeamView addTeamView = new AddTeamView();
                     addTeamView.showAddTeamMenu();
                     break;
                 case 2:
                     DeleteTeamView deleteTeamView = new DeleteTeamView();
                     deleteTeamView.deleteTeam();
-                    // TODO: 9/5/2022 delete team method
                     break;
                 case 3:
                     // TODO: 9/5/2022 add game method
                     break;
                 case 4:
                     // TODO: 9/5/2022  show information team
+                    ShowInformationTeamView showInformationTeamView=new ShowInformationTeamView();
+                    showInformationTeamView.showInformationTeam();
                     break;
                 case 5: // TODO: 9/5/2022 show table
                     break;

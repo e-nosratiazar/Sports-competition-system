@@ -27,6 +27,6 @@ public class FootballTeam extends Team {
 
     @Override
     public String toString() {
-        return " id=" + id + "name='" + name + '\'' + ", nationality='" + nationality + '\'';
+        return "id = " + id + "\tname = '" + name + '\'' + "\tnationality = '" + nationality + '\'';
     }
 }

@@ -2,32 +2,24 @@ package ir.maktab.sports.competition.model.league;
 
 import ir.maktab.sports.competition.model.Sports;
 import ir.maktab.sports.competition.model.teams.Team;
+import ir.maktab.sports.competition.model.teams.VolleyballTeam;
 
-public class VolleyballLeague implements league {
-    Sports sport = Sports.VOLLEYBALL;
+import java.util.List;
 
-    @Override
-    public void addTeam(Team team) {
+public class VolleyballLeague extends league {
+    Sports sport;
+    List<VolleyballTeam> volleyballTeams;
 
+    public VolleyballLeague( List<VolleyballTeam> volleyballTeams) {
+        this.volleyballTeams = volleyballTeams;
+        this.sport =Sports.VOLLEYBALL;
     }
 
-    @Override
-    public void deleteTeam() {
-
+    public List<VolleyballTeam> getVolleyballTeams() {
+        return volleyballTeams;
     }
 
-    @Override
-    public void addGame() {
-
-    }
-
-    @Override
-    public void showInformationOfTeam() {
-
-    }
-
-    @Override
-    public void showTournamentTable() {
-
+    public void setVolleyballTeams(List<VolleyballTeam> volleyballTeams) {
+        this.volleyballTeams = volleyballTeams;
     }
 }

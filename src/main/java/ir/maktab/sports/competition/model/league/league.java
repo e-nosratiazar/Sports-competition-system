@@ -1,12 +1,14 @@
 package ir.maktab.sports.competition.model.league;
 
+import ir.maktab.sports.competition.model.Sports;
 import ir.maktab.sports.competition.model.teams.Team;
 
-public interface league {
-public void addTeam(Team team);
-public void deleteTeam();
-public void addGame();
-public void showInformationOfTeam();
-public void showTournamentTable();
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class league {
+int id;
+Sports sport;
+List<Team> teams=new ArrayList<>();
 
 }

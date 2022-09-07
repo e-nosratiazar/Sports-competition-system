@@ -9,7 +9,6 @@ import java.util.List;
 public abstract class Team {
     String name;
     String nationality;
-
     int id;
     int score;
     List<Player> players = new ArrayList<>();
