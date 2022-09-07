@@ -67,12 +67,18 @@ public class FootballTeamRepository {
     }
 
 
-    public String showInformationById(int i) throws SQLException {
-        String sql="select * from t_team where id=?";
+    public FootballTeam showInformationTeamById(int i) throws SQLException {
+        FootballTeam footballTeam = null;
+        String sql="select name,nationality,score from t_team where id=?";
         PreparedStatement preparedStatement=Application.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, i);
         ResultSet resultSet =preparedStatement.executeQuery();
-        // TODO: 9/6/2022 :jadval team kamel shavad 
-        return null;
+        while (resultSet.next()){
+            String  teamName=resultSet.getString("name");
+            String nationality=resultSet.getString("nationality");
+            double  score=resultSet.getDouble("score");
+             footballTeam = new FootballTeam(i,teamName,nationality);
+        }
+        return footballTeam;
     }
 }

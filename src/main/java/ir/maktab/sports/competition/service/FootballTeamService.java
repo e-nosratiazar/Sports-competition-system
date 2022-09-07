@@ -36,7 +36,11 @@ public class FootballTeamService {
         }
     }
 
-    public String showInformationById(int i) {
-        return footballTeamRepository.showInformationById(i);
+    public FootballTeam showInformationById(int i) {
+        try {
+            return footballTeamRepository.showInformationTeamById(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
