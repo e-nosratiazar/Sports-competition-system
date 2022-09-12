@@ -20,6 +20,8 @@ public abstract class Team {
         score = 0;
     }
 
+
+
     public Team(int id, String name, String nationality) {
         this.id = id;
         this.name = name;

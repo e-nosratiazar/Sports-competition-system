@@ -18,10 +18,9 @@ public class MainView extends AbstractView {
                     footballLeagueView.showFootballLeagueMenu();
                     break;
                 case 2:
-                    //                // TODO: 9/5/2022
                     VolleyballLeagueView volleyballLeagueView = new VolleyballLeagueView();
                     volleyballLeagueView.showVolleyballLeagueMenu();
-                    //                break;
+                    break;
                 case 3:
                     stayInMenu = false;
                     break;

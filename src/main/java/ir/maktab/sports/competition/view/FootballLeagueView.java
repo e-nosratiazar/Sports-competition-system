@@ -1,8 +1,10 @@
 package ir.maktab.sports.competition.view;
 
+import java.sql.SQLException;
+
 public class FootballLeagueView extends AbstractView {
 
-    public void showFootballLeagueMenu() {
+    public void showFootballLeagueMenu() throws SQLException {
         boolean stayInMenu = true;
         while (stayInMenu) {
             System.out.print("\t1 : add a team" +
@@ -24,10 +26,10 @@ public class FootballLeagueView extends AbstractView {
                     deleteTeamView.deleteFootballTeamMenu();
                     break;
                 case 3:
-                    // TODO: 9/5/2022 add game method
+                    AddGameView addGameView = new AddGameView();
+                    addGameView.showAddFootballGameMenu();
                     break;
                 case 4:
-                    // TODO: 9/5/2022  show information team
                     ShowInformationTeamView showInformationTeamView = new ShowInformationTeamView();
                     showInformationTeamView.showInformationFootballTeamMenu();
                     break;

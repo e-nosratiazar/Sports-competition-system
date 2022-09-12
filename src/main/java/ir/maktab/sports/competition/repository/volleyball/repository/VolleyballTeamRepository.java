@@ -1,13 +1,11 @@
 package ir.maktab.sports.competition.repository.volleyball.repository;
 
-import ir.maktab.sports.competition.model.teams.FootballTeam;
 import ir.maktab.sports.competition.model.teams.VolleyballTeam;
 import ir.maktab.sports.competition.util.Application;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,27 +28,21 @@ public class VolleyballTeamRepository {
         preparedStatement.executeUpdate();
     }
 
-    public List<VolleyballTeam> loadAllTeams() {
-        try {
-            return doLoadAllTeams();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    private List<VolleyballTeam> doLoadAllTeams() throws SQLException {
-        List<VolleyballTeam> result = new ArrayList<>();
-        String sql = "select id, name, nationality from t_team where league_id=2";
-        Statement statement = Application.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+
+    public List<VolleyballTeam> loadAllTeams(int leagueId) throws SQLException {
+        List<VolleyballTeam> volleyballTeams = new ArrayList<>();
+        String sql = "select  name, nationality from t_team where league_id=?";
+        PreparedStatement statement = Application.getConnection().prepareStatement(sql);
+        statement.setInt(1,leagueId);
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
             String nationality = resultSet.getString("nationality");
-            VolleyballTeam volleyballTeam = new VolleyballTeam(id, name, nationality);
-            result.add(volleyballTeam);
+            VolleyballTeam volleyballTeam = new VolleyballTeam( name, nationality);
+            volleyballTeams.add(volleyballTeam);
         }
-        return result;
+        return volleyballTeams;
     }
 
     public int removeById(int i) {
@@ -69,7 +61,7 @@ public class VolleyballTeamRepository {
     }
 
     public VolleyballTeam showInformationTeamById(int i) throws SQLException {
-        VolleyballTeam volleyballTeam = null;
+//        VolleyballTeam volleyballTeam = null;
         String sql = "select name,nationality,score from t_team where id=?";
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, i);
@@ -78,9 +70,9 @@ public class VolleyballTeamRepository {
             String teamName = resultSet.getString("name");
             String nationality = resultSet.getString("nationality");
             double score = resultSet.getDouble("score");
-            volleyballTeam = new VolleyballTeam(i, teamName, nationality);
+            return new VolleyballTeam(i, teamName, nationality);
         }
-        return volleyballTeam;
+        throw new RuntimeException("Team not found by id " + i);
     }
 
 

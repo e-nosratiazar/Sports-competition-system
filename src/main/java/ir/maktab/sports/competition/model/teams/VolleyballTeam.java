@@ -34,7 +34,6 @@ public class VolleyballTeam extends Team {
         return "\tid = " + id +
                 "\tname = '" + name + '\'' +
                 "\tnationality = '" + nationality + '\'' +
-                "\tscore = " + score +
-                "\n\tplayers: " + players;
+                "\tscore = " + score ;
     }
 }

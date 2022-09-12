@@ -13,6 +13,8 @@ public class FootballTeam extends Team {
         super(name, nationality);
     }
 
+
+
     public FootballTeam(int id, String name, String nationality) {
         super(id, name, nationality);
     }

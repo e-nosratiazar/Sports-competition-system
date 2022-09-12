@@ -31,17 +31,31 @@ public class Competition {
         }*/
     int hostTeamId;
     int opponentTeamId;
-    int winnerId;   //winnerId=0 --> result Of game was draw
-
-    public Competition(int hostTeamId, int opponentTeamId) {
-        this.hostTeamId = hostTeamId;
-        this.opponentTeamId = opponentTeamId;
+    int leagueId;
+    int winnerID;
+    enum result{
+        DRAW,WIND_HOST,WIND_OPPONENT;
     }
 
-    public Competition(int hostTeamId, int opponentTeamId, int winnerId) {
+    public Competition(int hostTeamId, int opponentTeamId, int leagueId) {
         this.hostTeamId = hostTeamId;
         this.opponentTeamId = opponentTeamId;
-        this.winnerId = winnerId;
+        this.leagueId = leagueId;
+    }
+
+    public Competition(int hostTeamId, int opponentTeamId, int winnerID, int leagueId) {
+        this.hostTeamId = hostTeamId;
+        this.opponentTeamId = opponentTeamId;
+        this.winnerID=winnerID;
+        this.leagueId=leagueId;
+    }
+
+    public int getWinnerID() {
+        return winnerID;
+    }
+
+    public void setWinnerID(int winnerID) {
+        this.winnerID = winnerID;
     }
 
     public int getHostTeamId() {
@@ -60,12 +74,12 @@ public class Competition {
         this.opponentTeamId = opponentTeamId;
     }
 
-    public int getWinnerId() {
-        return winnerId;
+
+    public int getLeagueId() {
+        return leagueId;
     }
 
-    public void setWinnerId(int winnerId) {
-        this.winnerId = winnerId;
+    public void setLeagueId(int leagueId) {
+        this.leagueId = leagueId;
     }
-
 }

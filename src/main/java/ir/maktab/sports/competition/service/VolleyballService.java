@@ -1,7 +1,7 @@
 package ir.maktab.sports.competition.service;
 
 import ir.maktab.sports.competition.model.competitions.Competition;
-import ir.maktab.sports.competition.model.teams.FootballTeam;
+import ir.maktab.sports.competition.model.dto.AddGameDto;
 import ir.maktab.sports.competition.model.teams.VolleyballTeam;
 import ir.maktab.sports.competition.repository.volleyball.repository.VolleyballLeagueRepository;
 import ir.maktab.sports.competition.repository.volleyball.repository.VolleyballTeamRepository;
@@ -9,7 +9,7 @@ import ir.maktab.sports.competition.repository.volleyball.repository.VolleyballT
 import java.sql.SQLException;
 import java.util.List;
 
-public class VolleyballTeamService {
+public class VolleyballService {
 
     VolleyballTeamRepository volleyballTeamRepository = new VolleyballTeamRepository();
     VolleyballLeagueRepository volleyballLeagueRepository = new VolleyballLeagueRepository();
@@ -23,8 +23,13 @@ public class VolleyballTeamService {
         }
     }
 
-    public List<VolleyballTeam> loadAllVolleyballTeams() {
-        return volleyballTeamRepository.loadAllTeams();
+    public List<VolleyballTeam> loadAllVolleyballTeams()  {
+        int leagueId=volleyballLeagueRepository.findVolleyballLeagueId();
+        try {
+            return volleyballTeamRepository.loadAllTeams(leagueId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String removeById(int i) {
@@ -51,14 +56,15 @@ public class VolleyballTeamService {
     }
 
 
-    public String addGame(Competition competition) {
-        try {
-            if (volleyballLeagueRepository.saveGame(competition) == 1) {
-                return "save game is successful";
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return "save game is not successful";
-    }
+//    public String addGame(AddGameDto addGameDto) {
+//        try {
+//            int leagueId=volleyballLeagueRepository.findVolleyballLeagueId();
+//            int hostTeamId = footballTeamRepository.getIdByName(addGameDto.getHostTeam());
+//            int opponentTeamId = footballTeamRepository.getIdByName(addGameDto.getOpponent());
+//            int winnerId;
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return "save game is not successful";
+//    }
 }

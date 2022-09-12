@@ -10,75 +10,67 @@ import java.util.List;
 public class FootballTeamRepository {
 
 
-    public void save(FootballTeam team) {
-        try {
-            doSave(team);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static void doSave(FootballTeam team) throws SQLException {
+    public static int save(FootballTeam team,int leagueId) throws SQLException {
         String sql = "insert into t_team (league_id,name, nationality) values (?,?, ?)";
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
-        preparedStatement.setInt(1, 1);
+        preparedStatement.setInt(1, leagueId);
         preparedStatement.setString(2, team.getName());
         preparedStatement.setString(3, team.getNationality());
-
-        preparedStatement.executeUpdate();
+        return preparedStatement.executeUpdate();
     }
 
-    public List<FootballTeam> loadAllTeams() {
-        try {
-            return doLoadAllTeams();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    private static List<FootballTeam> doLoadAllTeams() throws SQLException {
+    public static List<FootballTeam> loadAllTeams(int leagueId) throws SQLException {
         List<FootballTeam> result = new ArrayList<>();
-        String sql = "select id, name, nationality from t_team where league_id=1";
-        Statement statement = Application.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        String sql = "select name, nationality from t_team where league_id=?";
+        PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, leagueId);
+        ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
             String nationality = resultSet.getString("nationality");
-            FootballTeam footballTeam = new FootballTeam(id, name, nationality);
+            FootballTeam footballTeam = new FootballTeam( name, nationality);
             result.add(footballTeam);
         }
         return result;
     }
 
-    public int removeById(int i) {
-        try {
-            return doRemoveById(i);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    private int doRemoveById(int i) throws SQLException {
-        String sql = "delete from t_team where id=?";
+
+    public int removeByName(String teamName, int leagueId) throws SQLException {
+        String sql = "delete from t_team where name=? and league_id=?";
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
-        preparedStatement.setInt(1, i);
+        preparedStatement.setString(1, teamName);
+        preparedStatement.setInt(2,leagueId);
         return preparedStatement.executeUpdate();
     }
 
 
-    public FootballTeam showInformationTeamById(int i) throws SQLException {
+    public FootballTeam showInformationTeamByName(String name) throws SQLException {
         FootballTeam footballTeam = null;
-        String sql = "select name,nationality,score from t_team where id=?";
+        String sql = "select name,nationality from t_team where name=?";
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
-        preparedStatement.setInt(1, i);
+        preparedStatement.setString(1, name);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             String teamName = resultSet.getString("name");
             String nationality = resultSet.getString("nationality");
-            double score = resultSet.getDouble("score");
-            footballTeam = new FootballTeam(i, teamName, nationality);
+            footballTeam = new FootballTeam( teamName, nationality);
         }
         return footballTeam;
+    }
+
+
+    public int getIdByName(String team) throws SQLException {
+        int teamId;
+        String sql="select id from t_team where name=?";
+        PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
+        preparedStatement.setString(1,team);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()){
+            teamId=resultSet.getInt("id");
+            return teamId;
+        }
+       return 0;
     }
 }
