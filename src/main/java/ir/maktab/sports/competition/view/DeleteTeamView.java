@@ -30,9 +30,9 @@ public class DeleteTeamView extends AbstractView {
                 teams) {
             System.out.println("\t" + team);
         }
-        System.out.println("enter id to remove");
-        int i = Integer.parseInt(scanner.nextLine());
-        String result = volleyballService.removeById(i);
+        System.out.println("enter team name to remove");
+        String tameName = scanner.nextLine();
+        String result = volleyballService.removeByName(tameName);
         System.out.println(result);
     }
 }

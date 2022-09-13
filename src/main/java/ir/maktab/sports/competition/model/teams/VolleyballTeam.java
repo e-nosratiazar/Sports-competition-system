@@ -13,6 +13,10 @@ public class VolleyballTeam extends Team {
         super(name, nationality);
     }
 
+    public VolleyballTeam(String name, String nationality, int score) {
+        super(name, nationality, score);
+    }
+
     public VolleyballTeam(int id, String name, String nationality) {
         super(id, name, nationality);
     }
@@ -27,11 +31,11 @@ public class VolleyballTeam extends Team {
 
     @Override
     public String toString() {
-        return "\tid = " + id + "\tname = '" + name + '\'' + "\tnationality = '" + nationality + '\'';
+        return  "\tname = '" + name + '\'' + "\tnationality = '" + nationality + '\'';
     }
 
     public String details() {
-        return "\tid = " + id +
+        return
                 "\tname = '" + name + '\'' +
                 "\tnationality = '" + nationality + '\'' +
                 "\tscore = " + score ;

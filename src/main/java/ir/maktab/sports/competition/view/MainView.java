@@ -1,9 +1,11 @@
 package ir.maktab.sports.competition.view;
 
+import java.sql.SQLException;
+
 public class MainView extends AbstractView {
 
 
-    public void showMainView() {
+    public void showMainView() throws SQLException {
         boolean stayInMenu = true;
         while (stayInMenu) {
             System.out.print(

@@ -65,6 +65,7 @@ public class FootballService {
                 winnerId = hostTeamId;
                 Competition competition = new Competition(hostTeamId, opponentTeamId, winnerId,leagueId);
                 footballLeagueRepository.saveGame(competition);
+
             } else if (addGameDto.getOpponentGoals() > addGameDto.getHostTeamGoals()) {
                 winnerId = opponentTeamId;
                 Competition competition = new Competition(hostTeamId, opponentTeamId, winnerId,leagueId);

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ShowInformationTeamView extends AbstractView {
+
     FootballService footballService = new FootballService();
     VolleyballService volleyballService = new VolleyballService();
 
@@ -29,9 +30,9 @@ public class ShowInformationTeamView extends AbstractView {
         for (VolleyballTeam team : teams) {
             System.out.println("\t" + team);
         }
-        System.out.println("enter id to show information : ");
-        int i = Integer.parseInt(scanner.nextLine());
-        VolleyballTeam result = volleyballService.showInformationById(i);
-        System.out.println(result);
+        System.out.println("enter name to show information : ");
+        String teamName = scanner.nextLine();
+        VolleyballTeam result = volleyballService.showInformationByName(teamName);
+        System.out.println(result.details());
     }
 }

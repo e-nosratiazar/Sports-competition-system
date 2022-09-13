@@ -25,12 +25,20 @@ public class AddGameView extends AbstractView {
         String hostTeam = scanner.nextLine();
         System.out.print("Enter opponent team name :");
         String opponent = scanner.nextLine();
-        System.out.print("enter the number of goals for team " + hostTeam + " : ");
-        int hostGoals=Integer.parseInt(scanner.nextLine());
-        System.out.print("enter the number of goals for team " + opponent + " : ");
-        int opponentGoals=Integer.parseInt(scanner.nextLine());
-        AddGameDto addGameDto = new AddGameDto(hostTeam, opponent, hostGoals, opponentGoals);
-        volleyballService.addGame(addGameDto);
+        System.out.print("How many sets has team " + hostTeam + " won : ");
+        int hostSetsWon = Integer.parseInt(scanner.nextLine());
+        System.out.print("How many sets has team " + opponent + " won : ");
+        int opponentSetsWon = Integer.parseInt(scanner.nextLine());
+        if ((hostSetsWon + opponentSetsWon) >= 3 && (hostSetsWon + opponentSetsWon) <= 5) {
+            AddGameDto addGameDto = new AddGameDto(hostTeam, opponent, hostSetsWon, opponentSetsWon);
+            try {
+                volleyballService.addGame(addGameDto);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("The entered numbers are invalid");
+        }
     }
 
 
@@ -45,9 +53,9 @@ public class AddGameView extends AbstractView {
         System.out.print("Enter opponent team name :");
         String opponent = scanner.nextLine();
         System.out.print("enter the number of goals for team " + hostTeam + " : ");
-        int hostGoals=Integer.parseInt(scanner.nextLine());
+        int hostGoals = Integer.parseInt(scanner.nextLine());
         System.out.print("enter the number of goals for team " + opponent + " : ");
-        int opponentGoals=Integer.parseInt(scanner.nextLine());
+        int opponentGoals = Integer.parseInt(scanner.nextLine());
         AddGameDto addGameDto = new AddGameDto(hostTeam, opponent, hostGoals, opponentGoals);
         footballService.addGame(addGameDto);
     }

@@ -20,7 +20,11 @@ public abstract class Team {
         score = 0;
     }
 
-
+    public Team(String name, String nationality, int score) {
+        this.name = name;
+        this.nationality = nationality;
+        this.score = score;
+    }
 
     public Team(int id, String name, String nationality) {
         this.id = id;
