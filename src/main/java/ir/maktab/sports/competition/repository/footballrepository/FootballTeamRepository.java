@@ -95,4 +95,25 @@ public class FootballTeamRepository {
         preparedStatement.setInt(3, scoringDto.getLeagueId());
         preparedStatement.executeUpdate();
     }
+
+
+    public List<Integer> findFootballTeamIdList(int footballLeagueId) {
+        try {
+            return doFindFootballTeamIdList(footballLeagueId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static List<Integer> doFindFootballTeamIdList(int footballLeagueId) throws SQLException {
+        List<Integer> idList = new ArrayList<>();
+        String sql = "select id from t_team where league_id = ?";
+        PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, footballLeagueId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            idList.add(resultSet.getInt(1));
+        }
+        return idList;
+    }
 }

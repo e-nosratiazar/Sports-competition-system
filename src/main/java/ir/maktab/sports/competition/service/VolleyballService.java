@@ -20,6 +20,7 @@ public class VolleyballService {
             volleyballTeamRepository.save(team);
             return "saved successfully";
         } catch (Exception e) {
+            System.out.println(e.getStackTrace());
             return "Error while saving team";
         }
     }

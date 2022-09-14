@@ -1,17 +1,14 @@
 package ir.maktab.sports.competition.model.dto;
 
-import ir.maktab.sports.competition.model.teams.Team;
-
-public class LeagueTableDto {
+public class LeagueTableRow {
     String teamName;
     int numberOfGames;
     int numberOfWins;
     int numberOfLosses;
     int numberOfDraw;
     int score;
-    int leagueId;
 
-    public LeagueTableDto(String team, int score, int numberOfGames, int numberOfWins, int numberOfLosses, int numberOfDraw) {
+    public LeagueTableRow(String team, int score, int numberOfGames, int numberOfWins, int numberOfLosses, int numberOfDraw) {
         this.teamName = team;
         this.score = score;
         this.numberOfGames = numberOfGames;
@@ -68,11 +65,8 @@ public class LeagueTableDto {
         this.score = score;
     }
 
-    public int getLeagueId() {
-        return leagueId;
-    }
-
-    public void setLeagueId(int leagueId) {
-        this.leagueId = leagueId;
+    @Override
+    public String toString() {
+        return String.format("%s\t%s\t%s\t%s\t%s\t%s", score, numberOfGames, numberOfWins, numberOfLosses, numberOfDraw, teamName);
     }
 }

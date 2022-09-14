@@ -35,6 +35,7 @@ public class FootballLeagueView extends AbstractView {
                     showInformationTeamView.showInformationFootballTeamMenu();
                     break;
                 case 5: // TODO: 9/5/2022 show table
+                    new ShowLeagueTableView().showFootballLeagueTable();
                     break;
                 case 6:
                     stayInMenu = false;
