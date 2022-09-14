@@ -14,25 +14,29 @@ public class DeleteTeamView extends AbstractView {
     VolleyballService volleyballService = new VolleyballService();
 
     public void deleteFootballTeamMenu() throws SQLException {
+        System.out.println("\n\t** remove football team **" +
+                "\n\twhich one team do you want to remove?\n ");
         List<FootballTeam> teams = footballService.loadAllFootballTeams();
         for (FootballTeam team : teams) {
             System.out.println("\t" + team);
         }
-        System.out.println("enter team name to remove");
+        System.out.print("enter team name to remove: ");
         String tameName = scanner.nextLine();
         String result = footballService.removeByName(tameName);
-        System.out.println(result);
+        System.out.println("\n\t"+result);
     }
 
     public void deleteVolleyballTeam() {
+        System.out.println("\n\t** remove volleyball team **" +
+                "\n\twhich one team do you want to remove?\n ");
         List<VolleyballTeam> teams = volleyballService.loadAllVolleyballTeams();
         for (VolleyballTeam team :
                 teams) {
             System.out.println("\t" + team);
         }
-        System.out.println("enter team name to remove");
+        System.out.print("enter team name to remove : ");
         String tameName = scanner.nextLine();
         String result = volleyballService.removeByName(tameName);
-        System.out.println(result);
+        System.out.println("\n\t"+result);
     }
 }

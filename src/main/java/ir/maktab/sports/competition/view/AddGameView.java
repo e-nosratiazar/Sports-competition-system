@@ -16,6 +16,8 @@ public class AddGameView extends AbstractView {
     VolleyballService volleyballService = new VolleyballService();
 
     public void showAddVolleyballGameMenu() {
+        System.out.println("\n\t** add volleyball game **" +
+                "\n\tthere are these teams in volleyball league\n");
         List<VolleyballTeam> teams = volleyballService.loadAllVolleyballTeams();
         for (VolleyballTeam team :
                 teams) {
@@ -37,12 +39,15 @@ public class AddGameView extends AbstractView {
                 throw new RuntimeException(e);
             }
         } else {
-            System.out.println("The entered numbers are invalid");
+            System.out.println("\t**the entered number is invalid" +
+                    " , try again**\n");
         }
     }
 
 
     public void showAddFootballGameMenu() throws SQLException {
+        System.out.println("\n\t** add football game **" +
+                "\n\tthere are these teams in football league\n");
         List<FootballTeam> teams = footballService.loadAllFootballTeams();
         for (FootballTeam team :
                 teams) {

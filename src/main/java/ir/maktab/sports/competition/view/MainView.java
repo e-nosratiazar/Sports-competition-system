@@ -12,7 +12,7 @@ public class MainView extends AbstractView {
                     "\t1 : Football league \n"
                             + "\t2 : Volleyball league \n"
                             + "\t3 : Exit\n" +
-                            "Enter your option : ");
+                            "\nEnter your option : ");
             int chosenOption = Integer.parseInt(scanner.nextLine());
             switch (chosenOption) {
                 case 1:
@@ -27,7 +27,8 @@ public class MainView extends AbstractView {
                     stayInMenu = false;
                     break;
                 default:
-                    System.out.println("the entered number is invalid");
+                    System.out.println("\t**the entered number is invalid" +
+                            " , try again**\n");
             }
         }
     }

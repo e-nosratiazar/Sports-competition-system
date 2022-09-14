@@ -7,7 +7,8 @@ public class FootballLeagueView extends AbstractView {
     public void showFootballLeagueMenu() throws SQLException {
         boolean stayInMenu = true;
         while (stayInMenu) {
-            System.out.print("\t1 : add a team" +
+            System.out.print("\n\t**you are in football league**" +
+                    "\n\t1 : add a team" +
                     "\n\t2 : delete a team" +
                     "\n\t3 : add game" +
                     "\n\t4 : show information of the team" +
@@ -39,7 +40,8 @@ public class FootballLeagueView extends AbstractView {
                     stayInMenu = false;
                     break;
                 default:
-                    System.out.println("the entered number is invalid");
+                    System.out.println("\t**the entered number is invalid" +
+                            " , try again**\n");
             }
         }
     }

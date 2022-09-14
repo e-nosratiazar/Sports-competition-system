@@ -93,11 +93,10 @@ public class VolleyballTeamRepository {
             score = resultSet.getInt("score");
             return score;
         }
-        return 0; //there is wrong
+        throw new RuntimeException("Team not found with name " + team);
     }
 
     public void updateScoresByTeamNames(ScoringDto scoringDto) throws SQLException {
-        System.out.println("scoringDto = " + scoringDto);
         String sql = "update t_team set score=? where name =? and league_id=?";
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, scoringDto.getScore());

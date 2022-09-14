@@ -14,25 +14,29 @@ public class ShowInformationTeamView extends AbstractView {
     VolleyballService volleyballService = new VolleyballService();
 
     public void showInformationFootballTeamMenu() throws SQLException {
+        System.out.println("\n\t** show information football team **" +
+                "\n\tthere are these teams in football league\n");
         List<FootballTeam> teams = footballService.loadAllFootballTeams();
         for (FootballTeam team : teams) {
             System.out.println("\t" + team);
         }
-        System.out.println("enter team name to show information : ");
+        System.out.print("\nenter team name display more information : ");
         String teamName = scanner.nextLine();
         FootballTeam result = footballService.showInformationByName(teamName);
-        System.out.println(result);
+        System.out.println("\n\t"+result.details());
     }
 
 
     public void showInformationVolleyballTeamMenu() {
+        System.out.println("\n\t** show information volleyball team **" +
+                "\n\tthere are these teams in volleyball league\n");
         List<VolleyballTeam> teams = volleyballService.loadAllVolleyballTeams();
         for (VolleyballTeam team : teams) {
-            System.out.println("\t" + team);
+            System.out.print("\t" + team);
         }
-        System.out.println("enter name to show information : ");
+        System.out.println("\nenter team name display more information : ");
         String teamName = scanner.nextLine();
         VolleyballTeam result = volleyballService.showInformationByName(teamName);
-        System.out.println(result.details());
+        System.out.println("\n\t"+result.details());
     }
 }

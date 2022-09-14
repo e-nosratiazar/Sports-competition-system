@@ -39,7 +39,8 @@ public class VolleyballLeagueView extends AbstractView {
                     stayInMenu = false;
                     break;
                 default:
-                    System.out.println("the entered number is invalid");
+                    System.out.println("\t**the entered number is invalid" +
+                            " , try again**\n");
             }
         }
     }

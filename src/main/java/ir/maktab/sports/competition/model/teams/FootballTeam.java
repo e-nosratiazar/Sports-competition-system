@@ -14,7 +14,6 @@ public class FootballTeam extends Team {
     }
 
 
-
     public FootballTeam(int id, String name, String nationality) {
         super(id, name, nationality);
     }
@@ -29,6 +28,13 @@ public class FootballTeam extends Team {
 
     @Override
     public String toString() {
-        return "id = " + id + "\tname = '" + name + '\'' + "\tnationality = '" + nationality + '\'';
+        return "name : " + name + "\tnationality : " + nationality;
+    }
+
+    public String details() {
+        return
+                "\tname : " + name +
+                        "\tnationality : " + nationality  +
+                        " \tscore = " + score;
     }
 }

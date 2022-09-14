@@ -31,13 +31,13 @@ public class VolleyballTeam extends Team {
 
     @Override
     public String toString() {
-        return  "\tname = '" + name + '\'' + "\tnationality = '" + nationality + '\'';
+        return  "name : " + name  + "\tnationality : " + nationality ;
     }
 
     public String details() {
         return
-                "\tname = '" + name + '\'' +
-                "\tnationality = '" + nationality + '\'' +
-                "\tscore = " + score ;
+                "\tname : " + name  +
+                "\tnationality : " + nationality  +
+                " \tscore = " + score ;
     }
 }

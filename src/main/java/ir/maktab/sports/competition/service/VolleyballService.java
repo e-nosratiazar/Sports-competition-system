@@ -58,9 +58,7 @@ public class VolleyballService {
     }
 
     public void addGame(AddGameDto addGameDto) throws SQLException {
-        System.out.println("adding game");
         int leagueId = volleyballLeagueRepository.findVolleyballLeagueId();
-        System.out.println("leagueId = " + leagueId);
         int hostTeamId = volleyballTeamRepository.getIdByName(addGameDto.getHostTeam());
         int opponentTeamId = volleyballTeamRepository.getIdByName(addGameDto.getOpponent());
         String winnerTeam = findWinnerName(addGameDto);
@@ -81,7 +79,6 @@ public class VolleyballService {
     public void updateScores(AddGameDto addGameDto, int leagueId) throws SQLException {
         int wonSetsSum = addGameDto.getHostTeamGoals() + addGameDto.getOpponentGoals();
         if (wonSetsSum == 3 || wonSetsSum == 4) {
-            System.out.println("updating with won score"+ wonSetsSum);
             updateScoresFor4MinusSets(addGameDto, leagueId);
         } else if (wonSetsSum == 5) {
             updateScoresFor5Sets(addGameDto, leagueId);

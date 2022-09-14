@@ -4,5 +4,11 @@ public class ShowLeagueTableView {
 
     public void showVolleyballLeagueTable() {
 
+
+    }
+
+    public void showFootballLeagueTable() {
+
+
     }
 }

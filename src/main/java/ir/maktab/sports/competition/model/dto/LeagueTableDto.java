@@ -3,28 +3,30 @@ package ir.maktab.sports.competition.model.dto;
 import ir.maktab.sports.competition.model.teams.Team;
 
 public class LeagueTableDto {
-    Team team;
+    String teamName;
     int numberOfGames;
     int numberOfWins;
     int numberOfLosses;
     int numberOfDraw;
     int score;
+    int leagueId;
 
-    public LeagueTableDto(Team team, int numberOfGames, int numberOfWins, int numberOfLosses, int numberOfDraw, int score) {
-        this.team = team;
+    public LeagueTableDto(String team, int numberOfGames, int numberOfWins, int numberOfLosses, int numberOfDraw, int score,int leagueId) {
+        this.teamName = team;
         this.numberOfGames = numberOfGames;
         this.numberOfWins = numberOfWins;
         this.numberOfLosses = numberOfLosses;
         this.numberOfDraw = numberOfDraw;
         this.score = score;
+        this.leagueId=leagueId;
     }
 
-    public Team getTeam() {
-        return team;
+    public String getTeamName() {
+        return teamName;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public int getNumberOfGames() {
@@ -65,5 +67,13 @@ public class LeagueTableDto {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getLeagueId() {
+        return leagueId;
+    }
+
+    public void setLeagueId(int leagueId) {
+        this.leagueId = leagueId;
     }
 }
