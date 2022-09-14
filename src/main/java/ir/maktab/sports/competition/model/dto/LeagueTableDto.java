@@ -11,14 +11,13 @@ public class LeagueTableDto {
     int score;
     int leagueId;
 
-    public LeagueTableDto(String team, int numberOfGames, int numberOfWins, int numberOfLosses, int numberOfDraw, int score,int leagueId) {
+    public LeagueTableDto(String team, int score, int numberOfGames, int numberOfWins, int numberOfLosses, int numberOfDraw) {
         this.teamName = team;
+        this.score = score;
         this.numberOfGames = numberOfGames;
         this.numberOfWins = numberOfWins;
         this.numberOfLosses = numberOfLosses;
         this.numberOfDraw = numberOfDraw;
-        this.score = score;
-        this.leagueId=leagueId;
     }
 
     public String getTeamName() {

@@ -2,12 +2,14 @@ package ir.maktab.sports.competition.service;
 
 import ir.maktab.sports.competition.model.competitions.Competition;
 import ir.maktab.sports.competition.model.dto.AddGameDto;
+import ir.maktab.sports.competition.model.dto.LeagueTableDto;
 import ir.maktab.sports.competition.model.dto.ScoringDto;
 import ir.maktab.sports.competition.model.teams.FootballTeam;
 import ir.maktab.sports.competition.repository.footballrepository.FootballLeagueRepository;
 import ir.maktab.sports.competition.repository.footballrepository.FootballTeamRepository;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FootballService {
@@ -99,4 +101,21 @@ public class FootballService {
     }
 
 
+    public List<LeagueTableDto> footballLeagueTable() throws SQLException {
+        List<LeagueTableDto> leagueTableList=new ArrayList<>();
+       footballTeamRepository.sortByScore();
+        int leagueId=footballLeagueRepository.findFootballLeagueId();
+        List<Integer> teamId=footballTeamRepository.getTeamsId(leagueId);
+        for (int i = 0; i < teamId.size(); i++) {
+            String name=footballTeamRepository.getNameById(teamId.get(i));
+            int score=footballTeamRepository.getScoreByName(name,leagueId);
+            int numGame=footballLeagueRepository.countGames(teamId.get(i));
+            int numWin=footballLeagueRepository.countWins(teamId.get(i));
+            int numLoss=footballLeagueRepository.countLosses(teamId.get(i));
+            int numDraw=footballLeagueRepository.countDraw(teamId.get(i));
+            LeagueTableDto leagueTableDto = new LeagueTableDto(name, score, numGame, numWin, numLoss, numDraw);
+            leagueTableList.add(leagueTableDto);
+        }
+       return leagueTableList;
+    }
 }

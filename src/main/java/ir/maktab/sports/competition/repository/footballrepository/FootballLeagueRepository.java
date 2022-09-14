@@ -2,11 +2,13 @@ package ir.maktab.sports.competition.repository.footballrepository;
 
 import ir.maktab.sports.competition.model.competitions.Competition;
 import ir.maktab.sports.competition.model.dto.AddGameDto;
+import ir.maktab.sports.competition.model.dto.LeagueTableDto;
 import ir.maktab.sports.competition.util.Application;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class FootballLeagueRepository {
 
@@ -38,4 +40,6 @@ public class FootballLeagueRepository {
         preparedStatement.setInt(3,competition.getLeagueId());
         preparedStatement.executeUpdate();
     }
+
+
 }
