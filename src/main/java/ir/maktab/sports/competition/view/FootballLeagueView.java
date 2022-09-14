@@ -19,22 +19,18 @@ public class FootballLeagueView extends AbstractView {
 
             switch (option) {
                 case 1:
-                    AddTeamView addTeamView = new AddTeamView();
-                    addTeamView.showAddFootballTeamMenu();
+                    new AddTeamView().showFootballTeamAdditionMenu();
                     break;
                 case 2:
-                    DeleteTeamView deleteTeamView = new DeleteTeamView();
-                    deleteTeamView.deleteFootballTeamMenu();
+                    new DeleteTeamView().showFootballTeamDeleteMenu();
                     break;
                 case 3:
-                    AddGameView addGameView = new AddGameView();
-                    addGameView.showAddFootballGameMenu();
+                    new AddGameView().showFootballGameAdditionMenu();
                     break;
                 case 4:
-                    ShowInformationTeamView showInformationTeamView = new ShowInformationTeamView();
-                    showInformationTeamView.showInformationFootballTeamMenu();
+                    new ShowTeamInformationView().showFootballTeamInformationMenu();
                     break;
-                case 5: // TODO: 9/5/2022 show table
+                case 5:
                     new ShowLeagueTableView().showFootballLeagueTable();
                     break;
                 case 6:

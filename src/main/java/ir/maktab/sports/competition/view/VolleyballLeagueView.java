@@ -28,8 +28,8 @@ public class VolleyballLeagueView extends AbstractView {
                     addGameView.showAddVolleyballGameMenu();
                     break;
                 case 4:
-                    ShowInformationTeamView showInformationTeamView = new ShowInformationTeamView();
-                    showInformationTeamView.showInformationVolleyballTeamMenu();
+                    ShowTeamInformationView showTeamInformationView = new ShowTeamInformationView();
+                    showTeamInformationView.showInformationVolleyballTeamMenu();
                     break;
                 case 5: // TODO: 9/5/2022 show table
                     ShowLeagueTableView showLeagueTableView = new ShowLeagueTableView();

@@ -1,6 +1,7 @@
-package ir.maktab.sports.competition.repository.volleyball.repository;
+package ir.maktab.sports.competition.repository;
 
 import ir.maktab.sports.competition.model.dto.ScoringDto;
+import ir.maktab.sports.competition.model.teams.Team;
 import ir.maktab.sports.competition.model.teams.VolleyballTeam;
 import ir.maktab.sports.competition.util.Application;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class VolleyballTeamRepository {
 
-    public void save(VolleyballTeam team) {
+    public void save(Team team) {
         try {
             doSave(team);
         } catch (SQLException e) {
@@ -20,7 +21,7 @@ public class VolleyballTeamRepository {
         }
     }
 
-    private static void doSave(VolleyballTeam team) throws SQLException {
+    private static void doSave(Team team) throws SQLException {
         String sql = "insert into t_team (league_id,name, nationality) values (?,?, ?)";
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, 2);

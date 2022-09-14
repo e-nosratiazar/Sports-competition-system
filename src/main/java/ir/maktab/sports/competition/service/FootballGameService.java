@@ -4,62 +4,28 @@ import ir.maktab.sports.competition.model.competitions.Competition;
 import ir.maktab.sports.competition.model.dto.AddGameDto;
 import ir.maktab.sports.competition.model.dto.LeagueTableRow;
 import ir.maktab.sports.competition.model.dto.ScoringDto;
-import ir.maktab.sports.competition.model.teams.FootballTeam;
-import ir.maktab.sports.competition.repository.footballrepository.FootballLeagueRepository;
-import ir.maktab.sports.competition.repository.footballrepository.FootballTeamRepository;
+import ir.maktab.sports.competition.repository.FootballGameRepository;
+import ir.maktab.sports.competition.repository.FootballTeamRepository;
+import ir.maktab.sports.competition.repository.LeagueRepository;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class FootballService {
+public class FootballGameService implements GameService {
+    private LeagueRepository footballLeagueRepository = new LeagueRepository();
+    private FootballTeamRepository footballTeamRepository = new FootballTeamRepository();
 
-    FootballTeamRepository footballTeamRepository = new FootballTeamRepository();
-    FootballLeagueRepository footballLeagueRepository = new FootballLeagueRepository();
+    private FootballGameRepository footballGameRepository = new FootballGameRepository();
 
-    public String save(FootballTeam team) {
+    public void addGame(AddGameDto addGameDto) {
         try {
-            int footballLeagueId = footballLeagueRepository.findFootballLeagueId();
-            int num = footballTeamRepository.save(team, footballLeagueId);
-            if (num == 1) {
-                return "saved successfully";
-            } else {
-                return "Error while saving team";
-            }
-        } catch (Exception e) {
-//            System.out.println(Arrays.toString(e.getStackTrace()));
-//            return "Error while saving team";
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<FootballTeam> loadAllFootballTeams() throws SQLException {
-        int footballLeagueId = footballLeagueRepository.findFootballLeagueId();
-        return footballTeamRepository.loadAllTeams(footballLeagueId);
-    }
-
-    public String removeByName(String teamName) {
-        try {
-            int footballLeagueId = footballLeagueRepository.findFootballLeagueId();
-            int num = footballTeamRepository.removeByName(teamName, footballLeagueId);
-            if (num == 1) {
-                return "removed successfully";
-            } else {
-                return "failed to remove";
-            }
-        } catch (Exception e) {
-            return "failed to remove";
-        }
-    }
-
-    public FootballTeam showInformationByName(String teamName) {
-        try {
-            return footballTeamRepository.showInformationTeamByName(teamName);
+            doAddGame(addGameDto);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void addGame(AddGameDto addGameDto) throws SQLException {
+    private void doAddGame(AddGameDto addGameDto) throws SQLException {
         int leagueId = footballLeagueRepository.findFootballLeagueId();
         int hostTeamId = footballTeamRepository.getIdByName(addGameDto.getHostTeam());
         int opponentTeamId = footballTeamRepository.getIdByName(addGameDto.getOpponent());
@@ -67,15 +33,15 @@ public class FootballService {
         if (addGameDto.getHostTeamGoals() > addGameDto.getOpponentGoals()) {
             winnerId = hostTeamId;
             Competition competition = new Competition(hostTeamId, opponentTeamId, winnerId, leagueId);
-            footballLeagueRepository.saveGame(competition);
+            footballGameRepository.saveGame(competition);
 
         } else if (addGameDto.getOpponentGoals() > addGameDto.getHostTeamGoals()) {
             winnerId = opponentTeamId;
             Competition competition = new Competition(hostTeamId, opponentTeamId, winnerId, leagueId);
-            footballLeagueRepository.saveGame(competition);
+            footballGameRepository.saveGame(competition);
         } else {
             Competition competition = new Competition(hostTeamId, opponentTeamId, leagueId);
-            footballLeagueRepository.saveDrawGame(competition);
+            footballGameRepository.saveDrawGame(competition);
         }
         updateScores(addGameDto, leagueId);
     }
@@ -101,10 +67,10 @@ public class FootballService {
 
     }
 
-
-    public List<LeagueTableRow> footballLeagueTable() {
+    public List<LeagueTableRow> leagueTable() {
         int footballLeagueId = footballLeagueRepository.findFootballLeagueId();
         List<Integer> teamIdList = footballTeamRepository.findFootballTeamIdList(footballLeagueId);
-        return footballLeagueRepository.loadLeagueTableRows(teamIdList);
+        return footballGameRepository.loadLeagueTableRows(teamIdList);
     }
+
 }

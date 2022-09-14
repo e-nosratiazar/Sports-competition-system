@@ -34,7 +34,7 @@ public class FootballTeam extends Team {
     public String details() {
         return
                 "\tname : " + name +
-                        "\tnationality : " + nationality  +
+                        "\tnationality : " + nationality +
                         " \tscore = " + score;
     }
 }

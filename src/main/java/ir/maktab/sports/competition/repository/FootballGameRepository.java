@@ -1,4 +1,4 @@
-package ir.maktab.sports.competition.repository.footballrepository;
+package ir.maktab.sports.competition.repository;
 
 import ir.maktab.sports.competition.model.competitions.Competition;
 import ir.maktab.sports.competition.model.dto.LeagueTableRow;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FootballLeagueRepository {
+public class FootballGameRepository {
 
     public void saveGame(Competition competition) throws SQLException {
         String sql = "insert into t_games (hostteam_id,opponent_id,winner_id,league_id) values (?,?,?,?)";
@@ -22,22 +22,6 @@ public class FootballLeagueRepository {
         preparedStatement.executeUpdate();
     }
 
-
-    public int findFootballLeagueId()  {
-        try {
-            return doFindFootballLeagueId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static int doFindFootballLeagueId() throws SQLException {
-        String sql = "select id from t_league where name = 'football'";
-        PreparedStatement statement = Application.getConnection().prepareStatement(sql);
-        ResultSet resultSet = statement.executeQuery();
-        resultSet.next();
-        return resultSet.getInt(1);
-    }
 
     public void saveDrawGame(Competition competition) throws SQLException {
         String sql = "insert into t_games (hostteam_id,opponent_id,league_id) values (?,?,?)";

@@ -1,24 +1,26 @@
 package ir.maktab.sports.competition.view;
 
-import ir.maktab.sports.competition.model.competitions.Competition;
 import ir.maktab.sports.competition.model.dto.AddGameDto;
 import ir.maktab.sports.competition.model.teams.FootballTeam;
 import ir.maktab.sports.competition.model.teams.VolleyballTeam;
-import ir.maktab.sports.competition.service.FootballService;
-import ir.maktab.sports.competition.service.VolleyballService;
+import ir.maktab.sports.competition.service.FootballGameService;
+import ir.maktab.sports.competition.service.FootballTeamService;
+import ir.maktab.sports.competition.service.VolleyballGameService;
+import ir.maktab.sports.competition.service.VolleyballTeamService;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class AddGameView extends AbstractView {
-    FootballService footballService = new FootballService();
-
-    VolleyballService volleyballService = new VolleyballService();
+    VolleyballTeamService volleyballTeamService = new VolleyballTeamService();
+    FootballTeamService footballTeamService = new FootballTeamService();
+    FootballGameService footballGameService = new FootballGameService();
+    VolleyballGameService volleyballGameService = new VolleyballGameService();
 
     public void showAddVolleyballGameMenu() {
         System.out.println("\n\t** add volleyball game **" +
                 "\n\tthere are these teams in volleyball league\n");
-        List<VolleyballTeam> teams = volleyballService.loadAllVolleyballTeams();
+        List<VolleyballTeam> teams = volleyballTeamService.loadAllVolleyballTeams();
         for (VolleyballTeam team :
                 teams) {
             System.out.println("\t" + team);
@@ -33,11 +35,7 @@ public class AddGameView extends AbstractView {
         int opponentSetsWon = Integer.parseInt(scanner.nextLine());
         if ((hostSetsWon + opponentSetsWon) >= 3 && (hostSetsWon + opponentSetsWon) <= 5) {
             AddGameDto addGameDto = new AddGameDto(hostTeam, opponent, hostSetsWon, opponentSetsWon);
-            try {
-                volleyballService.addGame(addGameDto);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            volleyballGameService.addGame(addGameDto);
         } else {
             System.out.println("\t**the entered number is invalid" +
                     " , try again**\n");
@@ -45,10 +43,10 @@ public class AddGameView extends AbstractView {
     }
 
 
-    public void showAddFootballGameMenu() throws SQLException {
+    public void showFootballGameAdditionMenu() throws SQLException {
         System.out.println("\n\t** add football game **" +
                 "\n\tthere are these teams in football league\n");
-        List<FootballTeam> teams = footballService.loadAllFootballTeams();
+        List<FootballTeam> teams = footballTeamService.loadAllFootballTeams();
         for (FootballTeam team :
                 teams) {
             System.out.println("\t" + team);
@@ -62,6 +60,6 @@ public class AddGameView extends AbstractView {
         System.out.print("enter the number of goals for team " + opponent + " : ");
         int opponentGoals = Integer.parseInt(scanner.nextLine());
         AddGameDto addGameDto = new AddGameDto(hostTeam, opponent, hostGoals, opponentGoals);
-        footballService.addGame(addGameDto);
+        footballGameService.addGame(addGameDto);
     }
 }

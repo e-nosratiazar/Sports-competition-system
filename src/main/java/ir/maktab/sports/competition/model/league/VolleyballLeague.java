@@ -1,7 +1,6 @@
 package ir.maktab.sports.competition.model.league;
 
 import ir.maktab.sports.competition.model.Sports;
-import ir.maktab.sports.competition.model.teams.Team;
 import ir.maktab.sports.competition.model.teams.VolleyballTeam;
 
 import java.util.List;

@@ -2,41 +2,41 @@ package ir.maktab.sports.competition.view;
 
 import ir.maktab.sports.competition.model.teams.FootballTeam;
 import ir.maktab.sports.competition.model.teams.VolleyballTeam;
-import ir.maktab.sports.competition.service.FootballService;
-import ir.maktab.sports.competition.service.VolleyballService;
+import ir.maktab.sports.competition.service.FootballTeamService;
+import ir.maktab.sports.competition.service.VolleyballTeamService;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class DeleteTeamView extends AbstractView {
 
-    FootballService footballService = new FootballService();
-    VolleyballService volleyballService = new VolleyballService();
+    FootballTeamService footballTeamService = new FootballTeamService();
+    VolleyballTeamService volleyballTeamService = new VolleyballTeamService();
 
-    public void deleteFootballTeamMenu() throws SQLException {
+    public void showFootballTeamDeleteMenu() throws SQLException {
         System.out.println("\n\t** remove football team **" +
                 "\n\twhich one team do you want to remove?\n ");
-        List<FootballTeam> teams = footballService.loadAllFootballTeams();
+        List<FootballTeam> teams = footballTeamService.loadAllFootballTeams();
         for (FootballTeam team : teams) {
             System.out.println("\t" + team);
         }
         System.out.print("enter team name to remove: ");
         String tameName = scanner.nextLine();
-        String result = footballService.removeByName(tameName);
-        System.out.println("\n\t"+result);
+        String result = footballTeamService.removeByName(tameName);
+        System.out.println("\n\t" + result);
     }
 
     public void deleteVolleyballTeam() {
         System.out.println("\n\t** remove volleyball team **" +
                 "\n\twhich one team do you want to remove?\n ");
-        List<VolleyballTeam> teams = volleyballService.loadAllVolleyballTeams();
+        List<VolleyballTeam> teams = volleyballTeamService.loadAllVolleyballTeams();
         for (VolleyballTeam team :
                 teams) {
             System.out.println("\t" + team);
         }
         System.out.print("enter team name to remove : ");
         String tameName = scanner.nextLine();
-        String result = volleyballService.removeByName(tameName);
-        System.out.println("\n\t"+result);
+        String result = volleyballTeamService.removeByName(tameName);
+        System.out.println("\n\t" + result);
     }
 }

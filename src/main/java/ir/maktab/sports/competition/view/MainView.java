@@ -16,12 +16,10 @@ public class MainView extends AbstractView {
             int chosenOption = Integer.parseInt(scanner.nextLine());
             switch (chosenOption) {
                 case 1:
-                    FootballLeagueView footballLeagueView = new FootballLeagueView();
-                    footballLeagueView.showFootballLeagueMenu();
+                    new FootballLeagueView().showFootballLeagueMenu();
                     break;
                 case 2:
-                    VolleyballLeagueView volleyballLeagueView = new VolleyballLeagueView();
-                    volleyballLeagueView.showVolleyballLeagueMenu();
+                    new VolleyballLeagueView().showVolleyballLeagueMenu();
                     break;
                 case 3:
                     stayInMenu = false;

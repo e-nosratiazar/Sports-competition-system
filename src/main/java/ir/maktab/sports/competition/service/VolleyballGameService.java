@@ -2,80 +2,41 @@ package ir.maktab.sports.competition.service;
 
 import ir.maktab.sports.competition.model.competitions.Competition;
 import ir.maktab.sports.competition.model.dto.AddGameDto;
+import ir.maktab.sports.competition.model.dto.LeagueTableRow;
 import ir.maktab.sports.competition.model.dto.ScoringDto;
-import ir.maktab.sports.competition.model.teams.VolleyballTeam;
-import ir.maktab.sports.competition.repository.volleyball.repository.VolleyballLeagueRepository;
-import ir.maktab.sports.competition.repository.volleyball.repository.VolleyballTeamRepository;
+import ir.maktab.sports.competition.repository.LeagueRepository;
+import ir.maktab.sports.competition.repository.VolleyballGameRepository;
+import ir.maktab.sports.competition.repository.VolleyballTeamRepository;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class VolleyballService {
+public class VolleyballGameService implements GameService {
 
+    LeagueRepository leagueRepository = new LeagueRepository();
     VolleyballTeamRepository volleyballTeamRepository = new VolleyballTeamRepository();
-    VolleyballLeagueRepository volleyballLeagueRepository = new VolleyballLeagueRepository();
+    VolleyballGameRepository volleyballGameRepository = new VolleyballGameRepository();
 
-    public String save(VolleyballTeam team) {
+    @Override
+    public void addGame(AddGameDto addGameDto) {
         try {
-            volleyballTeamRepository.save(team);
-            return "saved successfully";
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-            return "Error while saving team";
-        }
-    }
-
-    public List<VolleyballTeam> loadAllVolleyballTeams() {
-        try {
-            int leagueId = volleyballLeagueRepository.findVolleyballLeagueId();
-            return volleyballTeamRepository.loadAllTeams(leagueId);
+            doAddGame(addGameDto);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String removeByName(String name) {
-        try {
-            int leagueId = volleyballLeagueRepository.findVolleyballLeagueId();
-            int num = volleyballTeamRepository.removeByName(name, leagueId);
-            if (num == 1) {
-                return "removed successfully";
-            } else {
-                return "failed to remove";
-            }
-        } catch (Exception e) {
-            return "failed to remove";
-        }
-
-    }
-
-    public VolleyballTeam showInformationByName(String name) {
-        try {
-            return volleyballTeamRepository.showInformationTeamByName(name);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public void addGame(AddGameDto addGameDto) throws SQLException {
-        int leagueId = volleyballLeagueRepository.findVolleyballLeagueId();
+    private void doAddGame(AddGameDto addGameDto) throws SQLException {
+        int leagueId = leagueRepository.findVolleyballLeagueId();
         int hostTeamId = volleyballTeamRepository.getIdByName(addGameDto.getHostTeam());
         int opponentTeamId = volleyballTeamRepository.getIdByName(addGameDto.getOpponent());
         String winnerTeam = findWinnerName(addGameDto);
         int winnerId = volleyballTeamRepository.getIdByName(winnerTeam);
         Competition competition = new Competition(hostTeamId, opponentTeamId, winnerId, leagueId);
-        volleyballLeagueRepository.saveGame(competition);
+        volleyballGameRepository.saveGame(competition);
         updateScores(addGameDto, leagueId);
     }
 
-    private String findWinnerName(AddGameDto addGameDto) {
-        if (addGameDto.getHostTeamGoals() > addGameDto.getOpponentGoals()) {
-            return addGameDto.getHostTeam();
-        } else {
-            return addGameDto.getOpponent();
-        }
-    }
 
     public void updateScores(AddGameDto addGameDto, int leagueId) throws SQLException {
         int wonSetsSum = addGameDto.getHostTeamGoals() + addGameDto.getOpponentGoals();
@@ -123,5 +84,16 @@ public class VolleyballService {
         }
     }
 
+    private String findWinnerName(AddGameDto addGameDto) {
+        if (addGameDto.getHostTeamGoals() > addGameDto.getOpponentGoals()) {
+            return addGameDto.getHostTeam();
+        } else {
+            return addGameDto.getOpponent();
+        }
+    }
 
+    @Override
+    public List<LeagueTableRow> leagueTable() {
+        throw new RuntimeException("Not implemented yet");
+    }
 }

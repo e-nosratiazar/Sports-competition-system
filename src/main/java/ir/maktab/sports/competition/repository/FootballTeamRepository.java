@@ -1,17 +1,20 @@
-package ir.maktab.sports.competition.repository.footballrepository;
+package ir.maktab.sports.competition.repository;
 
 import ir.maktab.sports.competition.model.dto.ScoringDto;
 import ir.maktab.sports.competition.model.teams.FootballTeam;
+import ir.maktab.sports.competition.model.teams.Team;
 import ir.maktab.sports.competition.util.Application;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FootballTeamRepository {
 
 
-    public static int save(FootballTeam team, int leagueId) throws SQLException {
+    public int save(Team team, int leagueId) throws SQLException {
         String sql = "insert into t_team (league_id,name, nationality) values (?,?, ?)";
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, leagueId);
@@ -21,7 +24,7 @@ public class FootballTeamRepository {
     }
 
 
-    public static List<FootballTeam> loadAllTeams(int leagueId) throws SQLException {
+    public List<FootballTeam> loadAllTeams(int leagueId) throws SQLException {
         List<FootballTeam> result = new ArrayList<>();
         String sql = "select name, nationality from t_team where league_id=?";
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
@@ -111,7 +114,7 @@ public class FootballTeamRepository {
         PreparedStatement preparedStatement = Application.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, footballLeagueId);
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             idList.add(resultSet.getInt(1));
         }
         return idList;
